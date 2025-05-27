@@ -1,18 +1,45 @@
 // 1. Вывести коллекцию employees из базы данных company.
-company
+use company
+show collections
+db.employees.find()
 // 2. Найти сотрудников с возрастом от 25 до 35 лет включительно.
+db.employees.find({age: {$gte: 25, $lte: 35}})
 // 3. Найти сотрудников, которые работают в департаменте "Sales" и зарабатывают больше 7000.
+db.employees.find({
+    department: "Sales",
+    salary: {$gte: 7000}
+})
 // 4. Найти сотрудников, которые работают либо в департаменте "IT", либо в департаменте "Marketing".
+db.employees.find({department: {$in: ["IT",  "Marketing"]}})
 // 5. Найти сотрудников, которые не работают в департаменте "Finance" и имеют зарплату меньше 8000.
+db.employees.find({
+    department: {$ne: "Finance"},
+    salary: {$lt: 8000}
+})
 // 6. Найти сотрудников, чей возраст не больше 30 лет. Вывести только имя и возраст.
+db.employees.find({age: {$lte: 30}}, {name:1, age:1,_id:0})
 // 7. Найти сотрудников, которые работают в департаменте "HR". Вывести все поля, кроме id.
+db.employees.find({department: "HR"}, {name:1, age:1, department:1, salary:1, location: 1, _id:0})
 // 8. Найти сотрудников, чей возраст больше 30 лет и зарплата меньше 8000. Вывести имя, возраст и зарплату.
+db.employees.find({
+    age: {$gt : 30},
+    salary: {$lt: 8000}
+}, {name:1, age:1, salary:1, _id:0})
 // 9. Найти сотрудников, которые работают в департаменте "Marketing" или живут в "Chicago".
+db.employees.find({
+    $or: [
+        {department: "Marketing"},
+        {location: "Chicago"}
+    ]
+})
 // 10. Найти сотрудников, которые живут не в "New York". Вывести все поля, кроме id и salary.
+db.employees.find({location: {$ne: "New York"}}, {name:1, age:1, department:1, location: 1, _id:0})
 // 11. Найти сотрудников с зарплатой между 5000 и 8000.
+db.employees.find({salary: {$gt: 5000, $lt: 8000}})
 // 12. Создать базу данных store.
+use store
 // 13. Создать коллекцию users и заполнить её следующими данными:
-[
+db.users.insertMany([
     {
         _id: 1,
         name: "Alice",
@@ -126,9 +153,20 @@ company
             { orderId: 111, amount: 220, date: "2024-09-20" }
         ]
     }
-]
+])
 // 14. Найти пользователей, у которых хобби включает "reading".
+db.users.find({hobbies: "reading"})
 // 15. Найти пользователей, у которых сумма первого заказа больше 200.
+db.users.find({"orders.0.amount" : {$gt: 200}})
 // 16. Вывести пользователей, живущих в "Denver" или "Seattle", и показать только имя и почтовый индекс.
+db.users.find({"address.city" : {$in: ["Denver", "Seattle"]}})
 // 17. Найти пользователей, у которых сумма второго заказа больше 150.
+db.users.find({"orders.1.amount" : {$gt: 150}})
 // 18. Вывести пользователей, у которых хобби включает слово "coding" или "cycling".
+db.users.find({hobbies: {$in: ["coding", "cycling"]}})
+
+db.users.find({
+    $or: [
+        {hobbies: "coding"},
+        {hobbies: "cycling"}
+]})
