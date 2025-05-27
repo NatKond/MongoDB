@@ -1,5 +1,5 @@
 // 1. Создать базу данных company.
-use summarySession14
+use company
 
 // 2. Создать коллекцию employees и заполнить её одним документом:
   // id - 1

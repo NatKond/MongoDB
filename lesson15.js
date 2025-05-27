@@ -26,8 +26,8 @@ cls
 // ключ: значение,     
 // ключ: значение,     ...}
 
-insert into table
-values(..);
+//insert into table
+//values(..);
 
 
 db.users.insertOne({
@@ -217,16 +217,18 @@ db.fruits.find({title: {$ne : 'Lemon'}})
 db.fruits.find({count: {$in : [3,8]}})
 
 // Пример документа
-{
-    id: 1,
-    first_name: 'Ben',
-    last_name: 'Jameson',
-    skills: ['Teamworking', 'Creativity', 'Leadership'],
-    date_of_hire: '28.05.2014',
-    address: {
-        country: 'Armenia',
-        city: 'Yerevan',
-        street: 'Stepanyan',
-        building: 5
+[
+    {
+        id: 1,
+        first_name: 'Ben',
+        last_name: 'Jameson',
+        skills: ['Teamworking', 'Creativity', 'Leadership'],
+        date_of_hire: '28.05.2014',
+        address: {
+            country: 'Armenia',
+            city: 'Yerevan',
+            street: 'Stepanyan',
+            building: 5
+        }
     }
-}
+]
