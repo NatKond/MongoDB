@@ -35,7 +35,7 @@ db.employees.updateOne({
         {firstname: 'Emily'}, 
         {lastname: 'Davis'}
     ]},
-    {$inc: {salary: 100}}
+    {$inc: {salary: 1000}}
 )
 // 11. Уменьшить зарплату сотрудника Mike Johnson на 300.
 db.employees.updateOne({
@@ -66,6 +66,14 @@ db.employees.updateMany({
     $nor: [
         {firstname: 'Jane'}, 
         {lastname: 'Smith'}
+    ]},
+    {$unset: {bonus: 1}}
+)
+
+db.employees.updateMany({
+    $and: [
+        {firstname: {$ne: 'Jane'}}, 
+        {lastname: {$ne:'Smith'}}
     ]},
     {$unset: {bonus: 1}}
 )
