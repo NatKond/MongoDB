@@ -30,35 +30,23 @@ db.employees.updateMany(
 )
 
 // 10. Увеличить зарплату сотрудника Emily Davis на 1000.
-db.employees.updateOne({
-    $and: [
-        {firstname: 'Emily'}, 
-        {lastname: 'Davis'}
-    ]},
+db.employees.updateOne(
+    {firstname: 'Emily', lastname: 'Davis'},
     {$inc: {salary: 1000}}
 )
 // 11. Уменьшить зарплату сотрудника Mike Johnson на 300.
-db.employees.updateOne({
-    $and: [
-        {firstname: 'Mike'}, 
-        {lastname: 'Johnson'}
-    ]},
+db.employees.updateOne(
+    {firstname: 'Mike', lastname: 'Johnson'},
     {$inc: {salary: -300}}
 )
 // 12. Добавить поле department со значением IT для сотрудника Jane Smith.
-db.employees.updateOne({
-    $and: [
-        {firstname: 'Jane'}, 
-        {lastname: 'Smith'}
-    ]},
+db.employees.updateOne(
+    {firstname: 'Jane', lastname: 'Smith'},
     {$set: {department: 'IT'}}
 )
 // 13. Удалить поле skills у сотрудника Mike Johnson.
-db.employees.updateOne({
-    $and: [
-        {firstname: 'Mike'}, 
-        {lastname: 'Johnson'}
-    ]},
+db.employees.updateOne(
+    {firstname: 'Mike', lastname: 'Johnson'},
     {$unset: {skills: 1}}
 )
 // 14. Удалить поле bonus для всех сотрудников, кроме Jane Smith.
@@ -70,11 +58,8 @@ db.employees.updateMany({
     {$unset: {bonus: 1}}
 )
 
-db.employees.updateMany({
-    $and: [
-        {firstname: {$ne: 'Jane'}}, 
-        {lastname: {$ne:'Smith'}}
-    ]},
+db.employees.updateMany(
+    {firstname: {$ne: 'Jane'}, lastname: {$ne:'Smith'}},
     {$unset: {bonus: 1}}
 )
 // 15. Увеличить возраст на 1 всем сотрудникам младше 30 лет.
@@ -84,11 +69,8 @@ db.employees.updateMany(
 )
 
 // 16. Изменить должность Emily Davis на QA Engineer.
-db.employees.updateOne({
-    $and: [
-        {firstname: 'Emily'}, 
-        {lastname: 'Davis'}
-    ]},
+db.employees.updateOne(
+    {firstname: 'Emily', lastname: 'Davis'},
     {$set: {position: 'QA Engineer'}}
 )
 // 17. Добавить поле experience со значением 5 для всех сотрудников старше 30 лет.

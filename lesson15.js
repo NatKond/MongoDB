@@ -26,8 +26,8 @@ cls
 // ключ: значение,     
 // ключ: значение,     ...}
 
-//insert into table
-//values(..);
+// insert into table
+// values(..);
 
 
 db.users.insertOne({
