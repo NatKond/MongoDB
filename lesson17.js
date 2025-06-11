@@ -352,7 +352,7 @@ db.emp.updateMany(
 // $all: определяет набор значений, которые должны иметься в массиве
 
 // Выбрать сотрудников, у которых есть элементы 'curating a wine list' и 'creating wine pairings' в массиве Skills
-// db.emp.find({skills: {$all: ['curating a wine list', 'creating wine pairings']}});
+db.emp.find({skills: {$all: ['curating a wine list', 'creating wine pairings']}});
 
 // $elemMatch: определяет условие, которым должны соответствовать элемены в массиве
 
