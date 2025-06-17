@@ -61,7 +61,7 @@ db.orders.find({product: 'Apple', city: 'Madrid'});
 // 9. Найти заказы, в которых продукт — Banana или Orange.
 db.orders.find({product: {$in: ['Banana', 'Orange']}});
 // 10. Найти все заказы, где сумма заказа находится в диапазоне от 9 до 18 включительно.
-db.orders.find({amount: {$gte: 9}, amount: {$lte: 18}});
+db.orders.find({amount: {$gte: 9, $lte: 18}});
 // 11. Пропустить первые 2 документа и вывести следующие 3.
 db.orders.find().skip(2).limit(3);
 // 12. Вывести только поля customer и product, исключив остальные.
@@ -243,15 +243,20 @@ db.staff.updateOne(
 db.staff.find({name: "Ivan Petrov"});
 // 31. Посчитать, сколько раз был куплен продукт "Apple". (коллекция orders)
 db.orders.find({product: 'Apple'}).count();
+
+db.orders.aggregate([
+  {$match:{product: 'Apple'}},
+  {$group: {_id: '$product', count: {$sum:1}}}
+])
 // 32. Посчитать количество заказов с продуктом "Apple" в городах Berlin и Madrid. (коллекция orders)
 db.orders.find({product: 'Apple',  city: {$in : ['Berlin', 'Madrid']}}).count();
 // 33. Посчитать, сколько всего было потрачено на каждый продукт. (коллекция orders)
 db.orders.aggregate([
-     {$group: {_id: null, total_sum: {$sum: '$amount'}}}
+     {$group: {_id: '$product', total_sum: {$sum: '$amount'}}}
 ]);
 // 34. Определить максимальную сумму заказа (amount) для каждого города. (коллекция orders)
 db.orders.aggregate([
-     {$group: {_id: '$city', sum_amount: {$sum: '$amount'}}}
+     {$group: {_id: '$city', max_amount: {$max: '$amount'}}}
 ]);
 // 35. Посчитать общее количество заказов в каждом городе. (коллекция orders)
 db.orders.aggregate([
